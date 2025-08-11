@@ -80,11 +80,11 @@ To run this application, you'll need Python 3 and the Pillow library.
 How to Use 🎮
 --------
 
-1.  **Roll the Dice:**Click the "Roll Dice" button to generate new musical parameters. The results will be displayed on the four dice.
+1.  **Roll the Dice:** Click the "Roll Dice" button to generate new musical parameters. The results will be displayed on the four dice.
     
-2.  **Select TET:**Use the "TET:" radio buttons in the top-right corner to switch between 12-TET (standard chromatic scale) and 24-TET (microtonal pitches).
+2.  **Select TET:** Use the "TET:" radio buttons in the top-right corner to switch between 12-TET (standard chromatic scale) and 24-TET (microtonal pitches).
     
-3.  **Get Help:**Click the "Help" button in the top-right corner to open the project's GitHub documentation in your web browser.
+3.  **Get Help:** Click the "Help" button in the top-right corner to open the project's GitHub documentation in your web browser.
     
 
 Contributing 🤝
@@ -105,6 +105,11 @@ Quaver: [Link](https://commons.wikimedia.org/w/index.php?curid=1334967)
 Semiquaver: [Link](https://commons.wikimedia.org/w/index.php?curid=1334970)  
 Demisemiquaver: [Link](https://commons.wikimedia.org/w/index.php?curid=1334983)
 
-  
-
 **Breve and Hemidemisemiquaver**: From Copyleft Website Liam Pitcher [Link](https://www.liampitcher.com/classical-music-blog/note-values)
+
+Special Thanks
+--------------
+
+Gemini AI: For all the hard work  
+All playtesters who playtested  
+You for playing
