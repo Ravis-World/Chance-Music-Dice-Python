@@ -4,6 +4,8 @@ from tkinter import font as tkFont
 from PIL import Image, ImageTk
 import dice # Import our dice logic from dice.py
 import webbrowser # Import the webbrowser module for opening URLs
+import os # Import os module for path manipulation
+import sys # Import sys module to check for PyInstaller environment
 
 class ChanceMusicDiceApp:
     """
@@ -19,15 +21,33 @@ class ChanceMusicDiceApp:
         master.resizable(True, True) # Allow resizing
         master.config(bg="#E6EBF3") # Soft blue-gray background
 
-        # --- Add this line for the favicon ---
+        # --- Favicon Integration (PyInstaller-aware pathing) ---
         try:
-            # Assuming your icon is in assets/images/app_icon.ico
-            icon_path = f"{dice.IMAGES_DIR}/app_icon.ico"
+            # Determine the base path for assets, considering PyInstaller
+            if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+                # Running as a PyInstaller bundle (e.g., .exe)
+                base_path = sys._MEIPASS
+            else:
+                # Running from source (e.g., python main.py)
+                base_path = os.path.abspath(os.path.dirname(__file__))
+            
+            # Construct the absolute path to the icon file
+            # Assumes assets/images is relative to the directory of gui.py or _MEIPASS
+            icon_path = os.path.join(base_path, "assets", "images", "app_icon.ico")
+            
+            # For debugging: print the resolved path
+            print(f"Attempting to load icon from: {icon_path}")
+
             master.iconbitmap(icon_path)
-        except tk.TclError:
-            print(f"Warning: Could not load icon file at {icon_path}. Ensure it's a valid .ico file and path is correct.")
-        # -----------------------------------
-        
+            
+        except tk.TclError as e:
+            print(f"Warning: Could not load icon file from {icon_path}. Ensure it's a valid .ico file and path is correct. Error: {e}")
+        except FileNotFoundError:
+            print(f"Error: Icon file not found at {icon_path}. Check your --add-data path in PyInstaller.")
+        except Exception as e:
+            print(f"An unexpected error occurred while loading icon: {e}")
+        # --------------------------------------------------------
+
         # --- Font Configuration ---
         self.title_font_size = 48
         self.button_font_size = 18
@@ -45,6 +65,7 @@ class ChanceMusicDiceApp:
         self.math_font = tkFont.Font(family="Noto Sans Math", size=self.die_value_font_size, weight="bold")
 
         # Custom font paths (used for reference, Tkinter relies on system fonts)
+        # These paths are for when running from source, not for bundled app
         self.noto_sans_font_path = f"{dice.FONTS_DIR}/NotoSans-VariableFont_wdth,wght.ttf"
         self.noto_tifinagh_font_path = f"{dice.FONTS_DIR}/NotoSansTifinagh-Regular.ttf"
         self.noto_math_font_path = f"{dice.FONTS_DIR}/NotoSansMath-Regular.ttf"
@@ -235,18 +256,17 @@ class ChanceMusicDiceApp:
             image_target_width = (die_bbox[2] - die_bbox[0]) * 0.8
             image_target_height = (die_bbox[3] - die_bbox[1]) * 0.8 # Adjusted height to fill more space
 
-            image_path = dice.get_duration_image_path(self._last_rolled_duration)
-            if image_path:
+            # Fix: Use os.path.join for image_path to handle bundled assets
+            image_filename = dice.get_duration_image_path(self._last_rolled_duration).split('/')[-1] # Get just the filename
+            image_path = self.get_asset_path(os.path.join("images", image_filename)) # Construct path for bundled app
+
+            if image_path: # Check if image_path is not None or empty
                 tk_image = self.load_and_resize_image(image_path, image_target_width, image_target_height)
                 if tk_image:
                     # Position image slightly higher to be centered in the available space
                     canvas.create_image(die_center_x, die_center_y, image=tk_image, tags="content_tag")
                     self.duration_images_cache[("current_display", self._last_rolled_duration)] = tk_image
 
-            # Removed the text for duration name
-            # canvas.create_text(die_center_x, die_bbox[3] - 20, # Vertically offset from bottom
-            #                    text=self._last_rolled_duration.capitalize(),
-            #                    font=self.die_value_font, fill="#333333", tags="content_tag")
             canvas.create_text(die_center_x, die_bbox[1] + 20, # Vertically offset from top
                                text="Duration:",
                                font=self.die_label_font, fill="#555555", tags="content_tag")
@@ -307,7 +327,7 @@ class ChanceMusicDiceApp:
         segment_start_index = 0
         for i, char in enumerate(pitch_result):
             # Check if the character is one of our special symbols or a separator
-            if char in ["ⵐ", "ȸ", "⩨", "d"]:
+            if char in ["ⵐ", "ȸ", "⩨", "𝄫", "#", "b", "/"]:
                 # If there's accumulated text before this special character, add it as a segment
                 if segment_start_index < i:
                     temp_segments.append((pitch_result[segment_start_index:i], self.die_value_font))
@@ -344,10 +364,8 @@ class ChanceMusicDiceApp:
         """
         Opens a web browser to the project's documentation.
         """
-        documentation_url = "https://github.com/Ravis-World/Chance-Music-Dice/Chance%20Music%20Dice%20 Documentation/index.html"
+        documentation_url = "https://github.com/Ravis-World/Chance-Music-Dice/Chance%20Music%20Dice%20Documentation/index.html"
         webbrowser.open_new(documentation_url)
-        # The messagebox is no longer needed as it opens documentation directly
-        # messagebox.showinfo("Help - Chance Music Dice Roller", help_text)
 
     def on_resize(self, event):
         """
@@ -396,10 +414,22 @@ class ChanceMusicDiceApp:
             self.duration_images_cache[cache_key] = tk_image
             return tk_image
         except FileNotFoundError:
-            print(f"Image not found: {image_path}")
-            # messagebox.showerror("Image Error", f"Image not found: {image_path}")
+            print(f"Error: Image not found at {image_path}. Check your --add-data path in PyInstaller for assets.")
             return None
         except Exception as e:
-            print(f"Error loading image {image_path}: {e}")
-            # messagebox.showerror("Image Error", f"Could not load image {image_path}: {e}")
+            print(f"An unexpected error occurred while loading image {image_path}: {e}")
             return None
+
+    def get_asset_path(self, relative_path):
+        """
+        Resolves the absolute path to an asset, handling both
+        development environment and PyInstaller bundled environment.
+        """
+        if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+            # Running as a PyInstaller bundle
+            return os.path.join(sys._MEIPASS, "assets", relative_path)
+        else:
+            # Running from source (assuming assets is sibling to src)
+            # Or if assets is directly in src, adjust '..' accordingly
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            return os.path.join(os.path.dirname(current_dir), "assets", relative_path)
