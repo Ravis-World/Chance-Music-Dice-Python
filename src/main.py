@@ -1,14 +1,14 @@
 import tkinter as tk
 from gui import ChanceMusicDiceApp
 
-if __name__ == "__main__":
-    # Create the main Tkinter window
+# Define the current version of your application
+__version__ = "1.0.01" # <--- Set your current app version here
+
+def main():
     root = tk.Tk()
-
-    # Instantiate the ChanceMusicDiceApp
-    # This initializes the GUI elements and sets up the window
-    app = ChanceMusicDiceApp(root)
-
-    # Start the Tkinter event loop
-    # This makes the window appear and handles all user interactions
+    # Pass the version number to the GUI app
+    app = ChanceMusicDiceApp(root, __version__) 
     root.mainloop()
+
+if __name__ == "__main__":
+    main()

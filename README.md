@@ -48,7 +48,6 @@ To run this application, you'll need Python 3 and the Pillow library.
 #### Prerequisites
 
 *   **Python 3.x:** Download and install from [python.org](https://www.python.org/downloads/).
-    
 *   **Pillow Library:** Used for image handling.
 
 1.  ```bash
@@ -63,7 +62,7 @@ To run this application, you'll need Python 3 and the Pillow library.
 3.  Activate the virtual environment; use the command that works with your operating system:
     ```bash
     source venv/bin/activate
-    .\venv\Scripts\activate
+    .\\venv\\Scripts\\activate
     ```
         
 4.  ```bash
