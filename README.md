@@ -73,8 +73,12 @@ To run this application, you'll need Python 3 and the Pillow library.
     
     *   **Fonts:** While the app points to paths, Tkinter primarily relies on these fonts being installed on your **operating system**. It's recommended to install the Noto Sans font family system-wide for the best visual experience, especially for the special characters in 24-TET.
         
-    *   **Favicon:** Make sure your app_icon.ico file is in assets/images/ for the application icon to display correctly.
-    
+    *   **Favicon:** Make sure your app_icon.ico file is in assets/images/ for the application icon to display correctly.   
+
+Dealing with Antivirus (e.g., Windows Defender) Flags 🛡️
+--------------------------------------------------------
+
+It is very common for executables created with PyInstaller to be flagged by antivirus software (like Windows Defender) as a potential threat. This is almost always a false positive because PyInstaller's bundling process (packing many files into one, extracting temporary files at runtime, and lack of a digital signature for personal projects) can mimic behaviors of malicious software. Rest assured, this program does none of that, and is therefore safe.
 
 How to Use 🎮
 --------
