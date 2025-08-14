@@ -24,7 +24,7 @@ Features ✨
     
 *   **Custom Application Icon:** A custom favicon appears in the window title and taskbar/dock when the application is running, providing a unique identity.
     
-*   **Fullscreen Windowed Mode:** The application launches maximized to fill your screen, providing an immersive experience without hiding the taskbar.
+*   **Fullscreen Windowed Mode:** The application launches maximized to fill your screen, providing an immersive experience.
     
 
 Installation 🚀
