@@ -109,10 +109,3 @@ Semiquaver: [Link](https://commons.wikimedia.org/w/index.php?curid=1334970)
 Demisemiquaver: [Link](https://commons.wikimedia.org/w/index.php?curid=1334983)
 
 **Breve and Hemidemisemiquaver**: From Copyleft Website Liam Pitcher [Link](https://www.liampitcher.com/classical-music-blog/note-values)
-
-Special Thanks
---------------
-
-Gemini AI: For all the hard work  
-All playtesters who playtested  
-You for playing
