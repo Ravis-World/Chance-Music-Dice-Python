@@ -19,6 +19,7 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
+*.txt
 
 # Logs and other generated files
 *.log

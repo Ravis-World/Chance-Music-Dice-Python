@@ -6,7 +6,7 @@ The Chance Music Dice Roller is a simple desktop application built with Python's
 Features ✨
 ----------
 
-*   **Randomized Musical Parameters:** Get instant suggestions for core musical elements:
+*   **Randomised Musical Parameters:** Get instant suggestions for core musical elements:
     
     *   **Note Durations:** Rolls various standard musical note values (e.g., breve, semibreve, crotchet, quaver).
         
@@ -24,7 +24,7 @@ Features ✨
     
 *   **Custom Application Icon:** A custom favicon appears in the window title and taskbar/dock when the application is running, providing a unique identity.
     
-*   **Fullscreen Windowed Mode:** The application launches maximized to fill your screen, providing an immersive experience.
+*   **Fullscreen Windowed Mode:** The application launches maximised to fill your screen, providing an immersive experience.
     
 
 Installation 🚀
@@ -88,19 +88,13 @@ How to Use 🎮
 2.  **Select TET:** Use the "TET:" radio buttons in the top-right corner to switch between 12-TET (standard chromatic scale) and 24-TET (microtonal pitches).
     
 3.  **Get Help:** Click the "Help" button in the top-right corner to open the project's GitHub documentation in your web browser.
-    
-
-Contributing 🤝
----------------
-
-Contributions are welcome! If you have ideas for new features, bug fixes, or improvements, please feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/ravis-world/Chance-Music-Dice-Python).
 
 Credits
 -------
 
 ### Images
 
-**Semibreve, Minim, Crotchet, Quaver, Semiquaver, Demisemiquaver:** By Christophe Dang Ngoc Chan ( [cdang](//commons.wikimedia.org/wiki/User:Cdang "User:Cdang") ) - self-made, with Inkscape, from LilyPond model, [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/ "Creative Commons Attribution-Share Alike 3.0") .  
+**Semibreve, Minim, Crotchet, Quaver, Semiquaver, Demisemiquaver:** By Christophe Dang Ngoc Chan ( [cdang](//commons.wikimedia.org/wiki/User:Cdang "User:Cdang") ) - self-made, with Inkscape, from LilyPond model, [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/ "Creative Commons Attribution-Share Alike 3.0").  
 Semibreve: [Link](https://commons.wikimedia.org/w/index.php?curid=1334978)  
 Minim: [Link](https://commons.wikimedia.org/w/index.php?curid=1334961)  
 Crotchet: [Link](https://commons.wikimedia.org/w/index.php?curid=1334974)  

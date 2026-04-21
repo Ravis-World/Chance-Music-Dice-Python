@@ -2,7 +2,7 @@ import tkinter as tk
 from gui import ChanceMusicDiceApp
 
 # Define the current version of your application
-__version__ = "1.0.01" # <--- Set your current app version here
+__version__ = "1.1.0" # <--- Set your current app version here
 
 def main():
     root = tk.Tk()
